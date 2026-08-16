@@ -1,0 +1,235 @@
+
+/* COLOUR AND VISUAL HIERARCHY
+I chose a dark neutral background with light body text to create strong
+contrast and keep the long written review comfortable to read. Green is
+used as an accent for questions and links so important information can
+be identified quickly without using too many colours. These CSS custom
+properties store the main colours and widths so that my webpage remains
+consistent and can be adjusted at anytime. */
+
+:root {
+    --bg: #1f2120;
+    --text: #f1f3ef;
+    --accent: #a7cf62;
+    --line: #3a3e3b;
+    --link: #b8df70;
+
+    --content-width: 72rem;
+    --text-width: 72ch;
+}
+
+/* Base */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "system-ui", sans-serif;
+    font-size: 1rem;
+    line-height: 1.7;
+
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.siteHeader {
+    padding: 2.2rem 1.5rem 1.2rem;
+    text-align: center;
+}
+
+.siteHeader h1 {
+    margin: 0;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1;
+    font-weight: 750;
+    letter-spacing: -0.035em;
+}
+
+/* LAYOUT AND READABILITY
+
+For the desktop layout, I used CSS Grid to create a narrow navigation area,
+a central reading column and additional empty space on the right. This
+keeps the main review visually balanced instead of stretching it across
+the entire browser window. I also limited paragraph width using ch units
+because very long text lines can become difficult to follow. Generous
+spacing and thin divider lines can separate each topic without adding
+unnecessary decorative elements, which makes the webpage look clear and clean. */
+
+
+.mainNavContainer {
+    width: min(100% - 3rem, 104rem);
+    margin-inline: auto;
+
+    display: grid;
+    grid-template-columns: 12rem minmax(0, var(--content-width)) 12rem;
+    justify-content: center;
+    gap: 2.5rem;
+
+    flex: 1;
+    padding-block: 1rem 3rem;
+}
+
+/* Left navigation */
+.sideNav {
+    border-right: 1px solid var(--line);
+    padding: 0.2rem 1.6rem 0 0;
+}
+
+.sideNav a {
+    position: sticky;
+    top: 1.5rem;
+
+    display: inline-block;
+    color: var(--link);
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.sideNav a:hover,
+.sideNav a:focus-visible {
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
+}
+
+/* Main content */
+main {
+    min-width: 0;
+}
+
+section {
+    max-width: var(--content-width);
+}
+
+section + section {
+    margin-top: 3.75rem;
+    padding-top: 3.2rem;
+    border-top: 1px solid var(--line);
+}
+
+.sectionTitle {
+    margin: 0 0 1.45rem;
+    color: var(--text);
+    font-size: clamp(1.65rem, 2.5vw, 2.15rem);
+    line-height: 1.2;
+    font-weight: 720;
+    letter-spacing: -0.02em;
+}
+
+
+h3 {
+    max-width: var(--text-width);
+    margin: 1.55rem 0 0.45rem;
+    color: var(--accent);
+    font-size: 1.08rem;
+    line-height: 1.35;
+    font-weight: 720;
+}
+
+section p {
+    max-width: var(--text-width);
+    margin: 0.6rem 0 0;
+    color: var(--text);
+    font-size: 1rem;
+    line-height: 1.75;
+}
+
+section p + p {
+    margin-top: 0.95rem;
+}
+
+
+a {
+    color: var(--link);
+}
+
+/* WEBPAGE SETUP FOR DIFFERENT ELECTRONIC PRODUCTS
+
+I added several media queries so the same page remains readable on desktop, tablet and phone screens. 
+On smaller screens the grid changes to a simpler layout, the side navigation moves above the content, and heading sizes are reduced. 
+This keeps the reading order consistent across different screen sizes while using the same HTML content.
+
+*/
+/* Desktop / ultrawide */
+@media (width > 1600px) {
+    :root {
+        --content-width: 76rem;
+        --text-width: 76ch;
+    }
+}
+
+/* Tablet / small desktop */
+@media (width < 1200px) {
+    .mainNavContainer {
+        width: min(100% - 2rem, 76rem);
+        grid-template-columns: 9rem minmax(0, 1fr);
+        gap: 2rem;
+    }
+
+}
+
+/* Tablet portrait */
+@media (width < 840px) {
+    .siteHeader {
+        padding-top: 1.5rem;
+    }
+
+    .mainNavContainer {
+        width: min(100% - 2rem, 46rem);
+        display: block;
+        padding-top: 0.2rem;
+    }
+
+    .sideNav {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 0 0 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .sideNav a {
+        position: static;
+    }
+
+    section + section {
+        margin-top: 3rem;
+        padding-top: 2.5rem;
+    }
+}
+
+/* Phone */
+@media (width < 600px) {
+    body {
+        font-size: 0.97rem;
+    }
+
+    .mainNavContainer {
+        width: min(100% - 1.4rem, 42rem);
+    }
+
+    .siteHeader {
+        padding-inline: 0.7rem;
+    }
+
+    .siteHeader h1 {
+        font-size: 2rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.55rem;
+    }
+
+    
+    h3 {
+        font-size: 1.03rem;
+    }
+
+    section p {
+        line-height: 1.68;
+    }
+}
+  
